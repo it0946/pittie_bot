@@ -1,27 +1,24 @@
 [package]
 name = "pittie_bot"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
+authors = ["it0964"]
+description = "For getting pictures of your dog on Discord"
 
 [dependencies]
-# Async runtime, only a single threaded runtime is required for a small bot that runs on one server
-tokio = { version = "1.0", features = ["macros", "rt"] }
-# Discord API related
-twilight-gateway = "0.12.1"
-twilight-http = "0.12.1"
-twilight-model = "0.12.1"
-futures = "0.3.21"
-# Convenient errors
-anyhow = "1"
-# Small rng crate for picking a random image
+# Async runtime
+tokio = { version = "1.20", features = ["macros", "rt"] }
+# Discord API wrapper
+serenity = { version = "0.11.5", features = ["gateway", "model", "client", "rustls_backend"], default-features = false }
+# For the config file
+serde = "1.0.144"
+serde_json = "1.0.83"
+# A rand crate which is faster and smaller than rand
 fastrand = "1.8.0"
-# Config stuff
-lazy_static = "1.4.0"
-serde = { version = "1.0", features = ["derive"]}
-serde_json = "1.0"
-
+# For convenient error handling
+anyhow = "1.0.62"
 
 [profile.release]
+codegen-units = 1
 strip = true
 lto = true
-codegen-units = 1
